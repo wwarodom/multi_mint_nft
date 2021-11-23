@@ -17,4 +17,9 @@ npm install
 npx hardhat run scripts/deploy.ts
 ```
 
+or deploy at Rinkeby network (Don't forget to change filename of .env.example to .env and update URL and PRIVATE_KEY with your credentials)
+```
+npx hardhat run scripts/deploy.ts --network rinkeby
+```
+
  Have fun!!
