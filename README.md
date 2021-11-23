@@ -1,5 +1,9 @@
 ### Minted OurGirlFriend NFT from MultiMinted Contract
 
+Asami was programmed on-chain with a single purpose: to find her soulmate and give them her heart. [Idol Research](https://www.idolresearchers.com/) 
+
+This example is to demonstrate how to mint multiple OurGirlFriend NFTs from a smart contract.
+
 ##### Steps:
 1. Receive funds to MultiMinted Contract
 2. Call "startARelationship()" of "OurGirlfriend contract" by specifying the NFT contract address  
