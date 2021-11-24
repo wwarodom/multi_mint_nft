@@ -14,6 +14,9 @@ async function main() {
     console.log("Relationship: " + await ourGirlfriend.tokenURI(0))
     const tokenUri = (await ourGirlfriend.tokenURI(0)).split(",");
     console.log(tokenUri[1]);
+
+    // OpenSea Metadata: https://docs.opensea.io/docs/metadata-standards
+    // Base64 decoder: https://www.base64decode.org/ 
     console.log(JSON.parse(Buffer.from(tokenUri[1], 'base64').toString()).image);
 
 }
