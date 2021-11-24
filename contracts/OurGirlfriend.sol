@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
     event Wooed(address _wooer, uint256 tokenId, uint256 _newScore);

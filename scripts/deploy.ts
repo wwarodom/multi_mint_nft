@@ -1,10 +1,9 @@
 import { ethers } from "hardhat";
 import { OurGirlfriend, MultiMint } from "../typechain";
-import { parseEther } from "@ethersproject/units";
-import { getFileInfo } from "prettier";
+import { parseEther } from "@ethersproject/units"; 
 
 async function main() {
-  const MAX_MINTED_NFT = 5;
+  const MAX_MINTED_NFT = 1;
   const NFT_PRICE = 0.07;
 
   const OurGirlfriend = await ethers.getContractFactory("OurGirlfriend");
@@ -27,17 +26,23 @@ async function main() {
   console.log('MultiMint contract balance after minted: ' + await multiMint.balance());
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  console.log("Relationship: " + await girlfriend.relationshipStatus(0))
-  console.log("Relationship: " + await girlfriend.tokenURI(0))
-  await girlfriend.woo(0);
+  // console.log("Relationship: " + await girlfriend.relationshipStatus(0))
+  // console.log("Relationship: " + await girlfriend.tokenURI(0))
+
+  let woo = await girlfriend.woo(0);
+  let woo1 = await woo.wait();
+  const result = (woo1.events?.filter((x) => { return x.event == "Wooed" }));
+  const [_wooer, tokenId, _newScore] = result?.pop()?.args as any;
+  console.log('Wooed event: ', _wooer, tokenId, _newScore);
+ 
   console.log("Relationship 0: " + await girlfriend.relationshipStatus(0))
   console.log("Relationship 1: " + await girlfriend.relationshipStatus(1))
   // console.log("Relationship: " + await girlfriend.tokenURI(0))
   const tokenUri = (await girlfriend.tokenURI(0)).split(",");
   // console.log(tokenUri[1]);
-  console.log(JSON.parse(Buffer.from(tokenUri[1], 'base64').toString()).image);  
+  console.log(JSON.parse(Buffer.from(tokenUri[1], 'base64').toString()).image);
 
-  console.log(await girlfriend.howIsSheFeeling() );
+  console.log(await girlfriend.howIsSheFeeling());
 }
 
 main().catch((error) => {

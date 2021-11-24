@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "./OurGirlfriend.sol"; 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol"; 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 contract MultiMint is ERC721Enumerable {
     OurGirlfriend private ogf;

@@ -7,6 +7,8 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
+import "hardhat-deploy";
+
 dotenv.config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -24,6 +26,9 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
+  namedAccounts: {
+    deployer: 0 
+  },
   networks: {
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
