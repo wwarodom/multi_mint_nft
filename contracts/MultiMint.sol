@@ -21,7 +21,7 @@ contract MultiMint is ERC721Enumerable {
     function withdraw() public {
         uint256 amount = address(this).balance;
         (bool success, ) = owner.call{value: amount}("");
-        require(success, "Failed to widthdraw Ether");
+        require(success, "Failed to withdraw Ether");
     }
 
     function balance() public view returns (uint256) {
