@@ -2,7 +2,7 @@
 
 Asami was programmed on-chain with a single purpose: to find her soulmate and give them her heart. [Idol Research](https://www.idolresearchers.com/) 
 
-This example is to demonstrate how to mint multiple OurGirlFriend NFTs from a smart contract.
+This example is to demonstrate how to mint multiple OurGirlFriend NFTs from a smart contract, and call all the rest functions.
 
 ##### Steps:
 1. Receive funds to MultiMinted Contract
@@ -14,7 +14,8 @@ This example is to demonstrate how to mint multiple OurGirlFriend NFTs from a sm
 git clone https://github.com/wwarodom/multi_mint_nft.git
 cd multi_mint_nft
 npm install
-npx hardhat run scripts/deploy.ts
+npx hardhat node
+npx hardhat --network localhost run scripts/[your_file].ts
 ```
 
 or deploy at Rinkeby network (Don't forget to change filename of .env.example to .env and update URL and PRIVATE_KEY with your credentials)

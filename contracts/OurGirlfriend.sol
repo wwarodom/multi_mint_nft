@@ -20,7 +20,7 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
     uint256 private creatorShareClaimed;
     uint256 public constant PRICE = 0.07 ether;
     // uint256 public constant MAX_SUPPLY = 7777;
-    uint256 public constant MAX_SUPPLY = 5;
+    uint256 public constant MAX_SUPPLY = 10;
 
     string[] private HOBBIES = [
         "Play vidya",
@@ -64,7 +64,7 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     function isGfTired() internal view returns (bool) {
         // return lastWooed + 1 hours > block.timestamp;
-        return lastWooed + 1 minutes > block.timestamp;
+        return lastWooed + 10 seconds > block.timestamp;
     }
 
     function woo(uint256 tokenId) public nonReentrant {
