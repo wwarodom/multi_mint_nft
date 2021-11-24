@@ -20,7 +20,7 @@ npx hardhat --network localhost run scripts/[your_file].ts
 
 or deploy at Rinkeby network (Don't forget to change filename of .env.example to .env and update URL and PRIVATE_KEY with your credentials)
 ```
-npx hardhat run scripts/deploy.ts --network rinkeby
+npx hardhat --network rinkeby run scripts/[your_file].ts
 ```
 
  Have fun!!
