@@ -7,12 +7,12 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 // import "hardhat/console.sol";
 
 contract MultiMint is ERC721Enumerable {
-    OurGirlfriend private ogf;
+    OurGirlfriend private ourGirlfriend;
 
     address payable public owner;
 
     constructor(address payable _ogf) payable ERC721("Madoka", "MADOKA") {
-        ogf = OurGirlfriend(payable(_ogf));
+        ourGirlfriend = OurGirlfriend(payable(_ogf));
         owner = payable(msg.sender);
     }
 
@@ -28,6 +28,7 @@ contract MultiMint is ERC721Enumerable {
         return address(this).balance;
     }
 
+    // Guarantee the safety of an NFT transferred to the receiving contract.
     function onERC721Received(
         address operator,
         address from,
@@ -37,16 +38,16 @@ contract MultiMint is ERC721Enumerable {
         return IERC721Receiver.onERC721Received.selector;
     }
 
-    function minty(uint256 amount) public payable {
-        for (uint256 i = 0; i < amount; i++) {
-            ogf.startARelationship{value: 0.07 ether}();
-            _transferNFTtoUser(i);
+    function minty(uint start, uint end) public payable {
+        for (uint256 i = 0; i < end; i++) {
+            ourGirlfriend.startARelationship{value: 0.07 ether}();
+            _transferNFTtoUser(start+i);
         }
         withdraw(); // take Ether back to the contract owner
     }
 
     function _transferNFTtoUser(uint256 tokenId) private {
-        ogf.approve(msg.sender, tokenId);
-        ogf.transferFrom(address(this), msg.sender, tokenId);
+        ourGirlfriend.approve(msg.sender, tokenId);
+        ourGirlfriend.transferFrom(address(this), msg.sender, tokenId);
     }
 }

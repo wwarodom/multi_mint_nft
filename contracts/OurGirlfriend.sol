@@ -64,7 +64,7 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     function isGfTired() internal view returns (bool) {
         // return lastWooed + 1 hours > block.timestamp;
-        return lastWooed + 10 seconds > block.timestamp;
+        return lastWooed + 20 seconds > block.timestamp;
     }
 
     function woo(uint256 tokenId) public nonReentrant {

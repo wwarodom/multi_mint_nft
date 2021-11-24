@@ -4,7 +4,7 @@ import { OurGirlfriend, MultiMint, OurGirlfriend__factory, MultiMint__factory } 
 import { parseEther } from "@ethersproject/units";
 
 async function main() {
-    const MAX_MINTED_NFT = 10;
+    const MAX_MINTED_NFT = 6;
     const NFT_PRICE = 0.07;
  
     const [deployer] = await ethers.getSigners();
@@ -22,12 +22,14 @@ async function main() {
     const amount = parseEther((MAX_MINTED_NFT * NFT_PRICE) + '');
     await multiMint.deposit({ value: amount });
 
-    console.log('MultiMint contract balance before minted: ' + await multiMint.balance());
-    console.log("Relationship: " + await ourGirlfriend.relationshipStatus(0))
+    const start = Number(await ourGirlfriend.totalSupply());
 
-    await multiMint.minty(MAX_MINTED_NFT);
+    console.log('MultiMint contract balance before minted: ' + await multiMint.balance());
+    console.log("Relationship: " + await ourGirlfriend.relationshipStatus(start))
+
+    await multiMint.minty( start , MAX_MINTED_NFT);
     console.log('MultiMint contract balance after minted: ' + await multiMint.balance());
-    console.log("Relationship: " + await ourGirlfriend.relationshipStatus(0))
+    console.log("Relationship: " + await ourGirlfriend.relationshipStatus(start))
     console.log("Account balance:", (await deployer.getBalance()).toString());
 }
 
