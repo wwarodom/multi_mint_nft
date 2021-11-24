@@ -131,9 +131,11 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
             return "1";
         } else if (relationshipScore < 2) {
             return "2";
-        } else if (relationshipScore < 10) {
+        // } else if (relationshipScore < 10) {
+        } else if (relationshipScore < 3) {
             return "3";
-        } else if (relationshipScore < 30) {
+        // } else if (relationshipScore < 30) {
+        } else if (relationshipScore < 5) {
             return "4";
         } else {
             return "5";
