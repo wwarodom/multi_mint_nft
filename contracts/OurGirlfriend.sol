@@ -19,7 +19,8 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
     uint256 public mintRevenue;
     uint256 private creatorShareClaimed;
     uint256 public constant PRICE = 0.07 ether;
-    uint256 public constant MAX_SUPPLY = 7777;
+    // uint256 public constant MAX_SUPPLY = 7777;
+    uint256 public constant MAX_SUPPLY = 5;
 
     string[] private HOBBIES = [
         "Play vidya",
@@ -62,7 +63,8 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
     }
 
     function isGfTired() internal view returns (bool) {
-        return lastWooed + 1 hours > block.timestamp;
+        // return lastWooed + 1 hours > block.timestamp;
+        return lastWooed + 1 minutes > block.timestamp;
     }
 
     function woo(uint256 tokenId) public nonReentrant {
@@ -83,7 +85,8 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
         emit Wooed(_msgSender(), tokenId, relationshipScores[tokenId]);
 
         // If your relationship score goes to 30, you become Our GF's soulmate
-        if (relationshipScores[tokenId] == 30) {
+        // if (relationshipScores[tokenId] == 30) {
+        if (relationshipScores[tokenId] == 5) {
             soulmate = _msgSender();
             _safeMint(_msgSender(), MAX_SUPPLY);
             // Our GF's soulmate gets half the mint revenue and Our GF's heart
@@ -107,9 +110,11 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
             return "Stranger";
         } else if (relationshipScore < 2) {
             return "Friend";
-        } else if (relationshipScore < 10) {
+        // } else if (relationshipScore < 10) {
+        } else if (relationshipScore < 3) {
             return "Someone Special";
-        } else if (relationshipScore < 30) {
+        // } else if (relationshipScore < 30) {
+        } else if (relationshipScore < 5) {
             return "Lover";
         } else {
             return "Soulmate";
@@ -152,7 +157,7 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
         override
         returns (string memory)
     {
-        if (tokenId == 7777) {
+        if (tokenId == MAX_SUPPLY) {
             return
                 string(
                     abi.encodePacked(
@@ -206,7 +211,7 @@ contract OurGirlfriend is ERC721Enumerable, Ownable, ReentrancyGuard {
                                 abi.encodePacked(
                                     '{"name": "Asami (v0.1) #',
                                     paddedTokenId,
-                                    '", "description": "Asami is looking for her soulmate.", "attributes": [ { "trait_type": "Relationship Status", "',
+                                    '", "description": "Asami is looking for her soulmate.", "attributes": [ { "trait_type": "Relationship Status",  "value": "',
                                     relationshipStatus(tokenId),
                                     '" }, { "trait_type": "Alignment", "value": "',
                                     tokenId % 2 == 0 ? "Light" : "Dark",

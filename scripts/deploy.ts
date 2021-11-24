@@ -1,6 +1,7 @@
 import { ethers } from "hardhat";
 import { OurGirlfriend, MultiMint } from "../typechain";
 import { parseEther } from "@ethersproject/units";
+import { getFileInfo } from "prettier";
 
 async function main() {
   const MAX_MINTED_NFT = 5;
@@ -25,6 +26,18 @@ async function main() {
   await multiMint.minty(MAX_MINTED_NFT);
   console.log('MultiMint contract balance after minted: ' + await multiMint.balance());
   console.log("Account balance:", (await deployer.getBalance()).toString());
+
+  console.log("Relationship: " + await girlfriend.relationshipStatus(0))
+  console.log("Relationship: " + await girlfriend.tokenURI(0))
+  await girlfriend.woo(0);
+  console.log("Relationship 0: " + await girlfriend.relationshipStatus(0))
+  console.log("Relationship 1: " + await girlfriend.relationshipStatus(1))
+  // console.log("Relationship: " + await girlfriend.tokenURI(0))
+  const tokenUri = (await girlfriend.tokenURI(0)).split(",");
+  // console.log(tokenUri[1]);
+  console.log(JSON.parse(Buffer.from(tokenUri[1], 'base64').toString()).image);  
+
+  console.log(await girlfriend.howIsSheFeeling() );
 }
 
 main().catch((error) => {
