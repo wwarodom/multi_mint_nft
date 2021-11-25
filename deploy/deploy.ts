@@ -1,11 +1,13 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { DeployFunction } from 'hardhat-deploy/types'; 
+import { DeployFunction } from 'hardhat-deploy/types';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
 
   const { deployer } = await getNamedAccounts();
+
+  
 
   const ogfContract = await deploy("OurGirlfriend", {
     from: deployer,
@@ -18,6 +20,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: [ogfContract.receipt?.contractAddress],
     log: true,
   });
+
+  await deploy("Miyabi", {
+    from: deployer,
+    args: [],
+    log: true,
+  });
 };
 export default func;
-func.tags = ["OurGirlfriend", "MultiMint"];
+func.tags = ["OurGirlfriend", "MultiMint", "Miyabi"];

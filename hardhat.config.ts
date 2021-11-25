@@ -27,7 +27,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   namedAccounts: {
-    deployer: 0 
+    deployer: 0
   },
   networks: {
     ropsten: {
@@ -49,5 +49,6 @@ const config: HardhatUserConfig = {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
 };
+ 
 
 export default config;

@@ -2,6 +2,8 @@
 import { ethers } from "hardhat";
 import { OurGirlfriend, MultiMint, OurGirlfriend__factory, MultiMint__factory } from "../typechain";
 import { parseEther } from "@ethersproject/units";
+import  MultimintArtifact  from "../deployments/localhost/MultiMint.json";
+import OurGirlfriendArtifact from "../deployments/localhost/OurGirlfriend.json";
 
 async function main() {
     const MAX_MINTED_NFT = 6;
@@ -11,12 +13,12 @@ async function main() {
     console.log("Deployer account:", deployer.address);
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
-    const ourGirlfriend = OurGirlfriend__factory.connect('0x5FbDB2315678afecb367f032d93F642f64180aa3', deployer) as OurGirlfriend;
+    const ourGirlfriend = OurGirlfriend__factory.connect(OurGirlfriendArtifact.address, deployer) as OurGirlfriend;
     console.log('ourGirlfriend ' + ourGirlfriend.address);
 
     console.log("Owner: ", await ourGirlfriend.owner());
 
-    const multiMint = MultiMint__factory.connect('0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512', deployer) as MultiMint;
+    const multiMint = MultiMint__factory.connect(MultimintArtifact.address, deployer) as MultiMint;
     console.log('multiMint ' + multiMint.address);
 
     const amount = parseEther((MAX_MINTED_NFT * NFT_PRICE) + '');
@@ -26,8 +28,8 @@ async function main() {
 
     console.log('MultiMint contract balance before minted: ' + await multiMint.balance());
     console.log("Relationship: " + await ourGirlfriend.relationshipStatus(start))
-
-    await multiMint.minty( start , MAX_MINTED_NFT);
+     
+    await multiMint.minty( start , MAX_MINTED_NFT  );
     console.log('MultiMint contract balance after minted: ' + await multiMint.balance());
     console.log("Relationship: " + await ourGirlfriend.relationshipStatus(start))
     console.log("Account balance:", (await deployer.getBalance()).toString());

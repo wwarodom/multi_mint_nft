@@ -38,8 +38,8 @@ contract MultiMint is ERC721Enumerable {
         return IERC721Receiver.onERC721Received.selector;
     }
 
-    function minty(uint start, uint end) public payable {
-        for (uint256 i = 0; i < end; i++) {
+    function minty(uint start, uint end1) public payable {
+        for (uint256 i = 0; i < end1; i++) {
             ourGirlfriend.startARelationship{value: 0.07 ether}();
             _transferNFTtoUser(start+i);
         }
